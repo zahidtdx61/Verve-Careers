@@ -1,3 +1,4 @@
+import AllJobs from "@/pages/AllJobs/AllJobs";
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import Home from "../pages/Home/Home";
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         path: "join-us",
         element: <Registration />,
+      },
+      {
+        path: "all-jobs",
+        element: <AllJobs />,
       },
     ],
   },
