@@ -1,15 +1,22 @@
+import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
+import ApplyJob from "./ApplyJob";
 
 const Job = () => {
+  const { user } = useAuth();
+  const { uid } = user || {};
   const session = useAxiosSecure();
   const { id } = useParams();
+  const [open, setOpen] = useState(false);
 
   const {
     data: job,
     isLoading: jobLoading,
     error: jobError,
+    refetch,
   } = useQuery({
     queryKey: ["job", id],
     queryFn: async () => {
@@ -18,7 +25,13 @@ const Job = () => {
     },
   });
 
-  console.log(job);
+  const checkApplied = () => {
+    if (job.applicants.map((applicant) => applicant.uid).includes(uid)) {
+      return true;
+    }
+    return false;
+  };
+
   if (jobLoading) return <p>Loading...</p>;
 
   return (
@@ -58,9 +71,23 @@ const Job = () => {
         </div>
 
         <div className="mt-8">
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
-            Apply Now
-          </button>
+          {checkApplied() ? (
+            <button
+              disabled
+              className="bg-blue-500 text-white px-4 py-2 rounded-md disabled:opacity-70 disabled:cursor-not-allowed"
+            >
+              You have already applied for this job
+            </button>
+          ) : (
+            <button
+              onClick={() => setOpen(true)}
+              className="bg-blue-500 text-white px-4 py-2 rounded-md"
+            >
+              Apply Now
+            </button>
+          )}
+
+          <ApplyJob open={open} setOpen={setOpen} job={job} refetch={refetch} />
         </div>
       </div>
     </div>

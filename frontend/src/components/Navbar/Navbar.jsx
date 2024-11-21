@@ -1,8 +1,10 @@
+import useAuth from "@/hooks/useAuth";
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [state, setState] = useState(false);
+  const { user } = useAuth();
 
   const navigation = [
     { title: "All Jobs", path: "all-jobs" },
@@ -87,12 +89,18 @@ const Navbar = () => {
             })}
           </ul>
           <div className="flex-1 gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
-            <Link
-              to={"/join-us"}
-              className="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 rounded-full md:inline-flex"
-            >
-              Join Us
-            </Link>
+            {user ? (
+              <div className="size-16">
+                <img src="https://png.pngtree.com/png-clipart/20200224/original/pngtree-cartoon-color-simple-male-avatar-png-image_5230557.jpg" />
+              </div>
+            ) : (
+              <Link
+                to={"/join-us"}
+                className="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 rounded-full md:inline-flex"
+              >
+                Join Us
+              </Link>
+            )}
           </div>
         </div>
       </div>
