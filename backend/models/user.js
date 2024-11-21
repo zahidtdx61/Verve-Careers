@@ -14,6 +14,14 @@ const userSchema = new Mongoose.Schema({
     required: true,
     unique: true,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  upDatedAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const User = Mongoose.model("User", userSchema);
