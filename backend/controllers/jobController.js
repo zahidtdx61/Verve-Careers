@@ -248,6 +248,57 @@ const updateJob = async (req, res) => {
   }
 };
 
+const deleteJob = async (req, res) => {
+  const { jobId } = req.params;
+  const { uid } = req.body;
+  try {
+    const user = await User.findOne({ uid });
+    if (!user) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: "Invalid user!",
+        data: {},
+        error: "Invalid user!",
+      });
+    }
+
+    const job = await Job.findById(jobId);
+    if (!job) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: "Invalid job!",
+        data: {},
+        error: "Invalid job!",
+      });
+    }
+
+    if (job.postedBy.toString() !== user._id.toString()) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: "You cannot delete this job!",
+        data: {},
+        error: "You cannot delete this job!",
+      });
+    }
+
+    await Job.findByIdAndDelete(jobId);
+
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Job deleted successfully",
+      data: {},
+      error: {},
+    });
+  } catch (error) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      success: false,
+      message: "Error deleting job!",
+      data: {},
+      error: error.errors,
+    });
+  }
+};
+
 module.exports = {
   addJob,
   allJobs,
@@ -256,4 +307,5 @@ module.exports = {
   applyJob,
   myAppliedJobs,
   updateJob,
+  deleteJob,
 };
