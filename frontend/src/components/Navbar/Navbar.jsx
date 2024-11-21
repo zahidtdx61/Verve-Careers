@@ -7,12 +7,19 @@ const Navbar = () => {
   const { user } = useAuth();
 
   const navigation = [
+    { title: "Home", path: "" },
     { title: "All Jobs", path: "all-jobs" },
     { title: "Applied Jobs", path: "applied-jobs" },
     { title: "Add a Job", path: "add-job" },
     { title: "My Jobs", path: "my-jobs" },
     { title: "Blogs", path: "blogs" },
   ];
+
+  const navStyle = (isActive) => {
+    return isActive
+      ? "border-b-2 pb-1 px-2 border-gray-900"
+      : "";
+  }
 
   useEffect(() => {
     document.onclick = (e) => {
@@ -80,8 +87,8 @@ const Navbar = () => {
           <ul className="justify-center items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
             {navigation.map((item, idx) => {
               return (
-                <li key={idx} className="text-gray-700 hover:text-gray-900">
-                  <NavLink to={item.path} className="block">
+                <li key={idx} className="text-gray-700 text-base hover:text-gray-900 block">
+                  <NavLink to={item.path}  className={({isActive}) => navStyle(isActive)}>
                     {item.title}
                   </NavLink>
                 </li>

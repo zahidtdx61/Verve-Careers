@@ -107,7 +107,7 @@ const myPostedJobs = async (req, res) => {
 const applyJob = async (req, res) => {
   const { uid } = req.body;
   const { jobId } = req.params;
-  console.log({ uid, jobId });
+  
   try {
     const user = await User.findOne({ uid });
     if (!user) {
@@ -148,7 +148,7 @@ const applyJob = async (req, res) => {
     }
 
     job.applicants.push(user._id);
-    job.applications += 1;
+    job.totalApplicants += 1;
     await job.save();
 
     res.status(StatusCodes.OK).json({

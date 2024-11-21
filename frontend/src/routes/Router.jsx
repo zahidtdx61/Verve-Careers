@@ -1,3 +1,4 @@
+import AppliedJobs from "@/pages/AppliedJobs/AppliedJobs";
 import Job from "@/pages/Job/Job";
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "job/:id",
         element: <Job />,
+      },
+      {
+        path: "applied-jobs",
+        element: <AppliedJobs />,
       },
     ],
   },

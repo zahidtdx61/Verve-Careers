@@ -28,7 +28,7 @@ const AllJobs = () => {
     },
   });
 
-  console.log(jobs);
+  // console.log(jobs);
 
   return (
     <div className="w-full lg:max-w-screen-xl mx-auto">
