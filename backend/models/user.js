@@ -18,7 +18,7 @@ const userSchema = new Mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  upDatedAt: {
+  updatedAt: {
     type: Date,
     default: Date.now,
   },
