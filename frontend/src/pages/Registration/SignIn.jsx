@@ -1,29 +1,40 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Label } from "@radix-ui/react-label";
-import { Input } from "postcss";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 const SignIn = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Account</CardTitle>
+        <CardTitle>Welcome Back!</CardTitle>
         <CardDescription>
-          Make changes to your account here. Click save when you're done.
+          Please sign in to access your account and explore new opportunities.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-2">
         <div className="space-y-1">
-          <Label htmlFor="name">Name</Label>
-          <Input id="name" defaultValue="Pedro Duarte" />
+          <Label htmlFor="name">Email</Label>
+          <Input type="email" id="name" placeholder="Enter your Email" />
         </div>
         <div className="space-y-1">
-          <Label htmlFor="username">Username</Label>
-          <Input id="username" defaultValue="@peduarte" />
+          <Label htmlFor="username">Password</Label>
+          <Input
+            type="password"
+            id="username"
+            placeholder="Enter your password"
+          />
         </div>
       </CardContent>
       <CardFooter>
-        <Button>Save changes</Button>
+        <Button>Log In</Button>
       </CardFooter>
     </Card>
   );
