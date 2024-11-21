@@ -39,7 +39,7 @@ const SignIn = () => {
     try {
       const result = await signInEmail(email, password);
       navigate(prevPage);
-      toast.success("Welcome to PharmaMart !!!");
+      toast.success("Welcome to Bloom Hire !!!");
       addUserToDatabase(result.user);
     } catch (error) {
       setIsLoading(false);
@@ -54,7 +54,7 @@ const SignIn = () => {
       const user = result.user;
       setUser(user);
       navigate(prevPage);
-      toast.success("Welcome to PharmaMart !!!");
+      toast.success("Welcome to Bloom Hire !!!");
       addUserToDatabase(user);
     } catch (error) {
       setIsLoading(false);
@@ -69,7 +69,7 @@ const SignIn = () => {
       const user = result.user;
       setUser(user);
       navigate(prevPage);
-      toast.success("Welcome to PharmaMart !!!");
+      toast.success("Welcome to Bloom Hire !!!");
       addUserToDatabase(user);
     } catch (error) {
       // console.log(error.code);
@@ -189,7 +189,7 @@ const SignIn = () => {
 
             <input
               type="submit"
-              className="w-full px-4 py-2 text-white font-medium bg-primary-teal  hover:bg-primary-green active:bg-primary-teal rounded-lg duration-150 hover:cursor-pointer"
+              className="w-full px-4 py-2 text-white font-medium bg-blue-500 hover:bg-blue-700  rounded-lg duration-150 hover:cursor-pointer"
               value="Log In"
             />
           </form>
