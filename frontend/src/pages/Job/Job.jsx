@@ -32,6 +32,13 @@ const Job = () => {
     return false;
   };
 
+  const checkOwnJob = () => {
+    if (job.postedBy.uid === uid) {
+      return true;
+    }
+    return false;
+  };
+
   if (jobLoading) return <p>Loading...</p>;
 
   return (
@@ -39,7 +46,7 @@ const Job = () => {
       <div>
         <div className="h-[500px]">
           <img
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-contain object-center"
             src={job.image}
             alt="Job"
           />
@@ -71,7 +78,14 @@ const Job = () => {
         </div>
 
         <div className="mt-8">
-          {checkApplied() ? (
+          {checkOwnJob() ? (
+            <button
+              disabled
+              className="bg-blue-500 text-white px-4 py-2 rounded-md disabled:opacity-70 disabled:cursor-not-allowed"
+            >
+              You can't apply for your own posted job
+            </button>
+          ) : checkApplied() ? (
             <button
               disabled
               className="bg-blue-500 text-white px-4 py-2 rounded-md disabled:opacity-70 disabled:cursor-not-allowed"
