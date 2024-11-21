@@ -52,7 +52,59 @@ const allJobs = async (req, res) => {
   }
 };
 
-module.exports = { 
+const jobDetails = async (req, res) => {
+  const { jobId } = req.params;
+  try {
+    const job = await Job.findById(jobId).populate("postedBy");
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Job details fetched successfully",
+      data: job,
+      error: {},
+    });
+  } catch (error) {
+    res.status(StatusCodes.BAD_REQUEST).json({
+      success: false,
+      message: "Error fetching job details!",
+      data: {},
+      error: error.errors,
+    });
+  }
+};
+
+const myPostedJobs = async (req, res) => {
+  const { uid } = req.body;
+  try {
+    const user = await User.findOne({ uid });
+
+    if (!user) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: "Invalid user!",
+        data: {},
+      });
+    }
+
+    const jobs = await Job.find({ postedBy: user._id });
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: "My posted jobs fetched successfully",
+      data: jobs,
+      error: {},
+    });
+  } catch (error) {
+    res.status(StatusCodes.BAD_REQUEST).json({
+      success: false,
+      message: "Error fetching my posted jobs!",
+      data: {},
+      error: error.errors,
+    });
+  }
+};
+
+module.exports = {
   addJob,
-  allJobs 
+  allJobs,
+  jobDetails,
+  myPostedJobs,
 };
