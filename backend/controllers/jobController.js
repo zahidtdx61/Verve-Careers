@@ -56,7 +56,7 @@ const allJobs = async (req, res) => {
 const jobDetails = async (req, res) => {
   const { jobId } = req.params;
   try {
-    const job = await Job.findById(jobId).populate("postedBy");
+    const job = await Job.findById(jobId).populate("postedBy").populate("applicants");
     res.status(StatusCodes.OK).json({
       success: true,
       message: "Job details fetched successfully",
@@ -107,6 +107,7 @@ const myPostedJobs = async (req, res) => {
 const applyJob = async (req, res) => {
   const { uid } = req.body;
   const { jobId } = req.params;
+  console.log({ uid, jobId });
   try {
     const user = await User.findOne({ uid });
     if (!user) {
@@ -147,6 +148,7 @@ const applyJob = async (req, res) => {
     }
 
     job.applicants.push(user._id);
+    job.applications += 1;
     await job.save();
 
     res.status(StatusCodes.OK).json({
@@ -156,6 +158,7 @@ const applyJob = async (req, res) => {
       error: {},
     });
   } catch (error) {
+    console.log(error);
     res.status(StatusCodes.BAD_REQUEST).json({
       success: false,
       message: "Error applying for job!",
