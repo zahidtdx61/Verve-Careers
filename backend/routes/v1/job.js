@@ -8,5 +8,6 @@ router.get("/all-jobs", JobController.allJobs);
 router.post("/add-job", verifyJWT, validateJobData, JobController.addJob);
 router.get("/job-details/:jobId", verifyJWT, JobController.jobDetails);
 router.get("/posted-jobs", verifyJWT, JobController.myPostedJobs);
+router.post("/apply-job/:jobId", verifyJWT, JobController.applyJob);
 
 module.exports = router;

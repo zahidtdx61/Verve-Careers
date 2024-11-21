@@ -102,9 +102,67 @@ const myPostedJobs = async (req, res) => {
   }
 };
 
+const applyJob = async (req, res) => {
+  const { uid } = req.body;
+  const { jobId } = req.params;
+  try {
+    const user = await User.findOne({ uid });
+    if (!user) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: "Invalid user!",
+        data: {},
+      });
+    }
+
+    const job = await Job.findById(jobId);
+    if (!job) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: "Invalid job!",
+        data: {},
+      });
+    }
+    
+    if (job.postedBy.toString() === user._id.toString()) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: "You cannot apply for your own job!",
+        data: {},
+      });
+    }
+
+    if (job.applicants.includes(user._id)) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: "You have already applied for this job!",
+        data: {},
+      });
+    }
+
+    job.applicants.push(user._id);
+    await job.save();
+
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Job applied successfully",
+      data: job,
+      error: {},
+    });
+  } catch (error) {
+    res.status(StatusCodes.BAD_REQUEST).json({
+      success: false,
+      message: "Error applying for job!",
+      data: {},
+      error: error.errors,
+    });
+  }
+};
+
 module.exports = {
   addJob,
   allJobs,
   jobDetails,
   myPostedJobs,
+  applyJob,
 };
