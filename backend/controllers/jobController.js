@@ -12,6 +12,7 @@ const addJob = async (req, res) => {
         success: false,
         message: "Invalid job poster!",
         data: {},
+        error: "Invalid job poster!",
       });
     }
     job.postedBy = jobPoster._id;
@@ -82,6 +83,7 @@ const myPostedJobs = async (req, res) => {
         success: false,
         message: "Invalid user!",
         data: {},
+        error: "Invalid user!",
       });
     }
 
@@ -112,6 +114,7 @@ const applyJob = async (req, res) => {
         success: false,
         message: "Invalid user!",
         data: {},
+        error: "Invalid user!",
       });
     }
 
@@ -121,14 +124,16 @@ const applyJob = async (req, res) => {
         success: false,
         message: "Invalid job!",
         data: {},
+        error: "Invalid job!",
       });
     }
-    
+
     if (job.postedBy.toString() === user._id.toString()) {
       return res.status(StatusCodes.BAD_REQUEST).json({
         success: false,
         message: "You cannot apply for your own job!",
         data: {},
+        error: "You cannot apply for your own job!",
       });
     }
 
@@ -137,6 +142,7 @@ const applyJob = async (req, res) => {
         success: false,
         message: "You have already applied for this job!",
         data: {},
+        error: "You have already applied for this job!",
       });
     }
 
@@ -159,10 +165,41 @@ const applyJob = async (req, res) => {
   }
 };
 
+const myAppliedJobs = async (req, res) => {
+  const { uid } = req.body;
+  try {
+    const user = await User.findOne({ uid });
+    if (!user) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: "Invalid user!",
+        data: {},
+        error: "Invalid user!",
+      });
+    }
+
+    const jobs = await Job.find({ applicants: user._id });
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: "My applied jobs fetched successfully",
+      data: jobs,
+      error: {},
+    });
+  } catch (error) {
+    res.status(StatusCodes.BAD_REQUEST).json({
+      success: false,
+      message: "Error fetching my applied jobs!",
+      data: {},
+      error: error.errors,
+    });
+  }
+};
+
 module.exports = {
   addJob,
   allJobs,
   jobDetails,
   myPostedJobs,
   applyJob,
+  myAppliedJobs,
 };
