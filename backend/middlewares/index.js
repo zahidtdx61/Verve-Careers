@@ -85,9 +85,34 @@ const validateJobData = (req, res, next) => {
   }
 };
 
+const validateUpdateJobData = (req, res, next) => {
+  const jobSchema = z.object({
+    name: z.string().min(1).optional(),
+    image: z.string().url().optional(),
+    description: z.string().min(1).optional(),
+    category: z.string().min(1).optional(),
+    salary: z.string().min(1).optional(),
+    applicationDeadline: z.coerce.date().optional(),
+    updatedAt: z.coerce.date().optional(),
+  });
+
+  try {
+    jobSchema.parse(req.body);
+    next();
+  } catch (error) {
+    res.status(StatusCodes.BAD_REQUEST).json({
+      success: false,
+      message: "Invalid job data!",
+      data: {},
+      error: error.errors,
+    });
+  }
+}
+
 module.exports = {
   validateUserRegisterData,
   createJWT,
   verifyJWT,
   validateJobData,
+  validateUpdateJobData,
 };

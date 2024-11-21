@@ -16,14 +16,13 @@ const register = async (req, res) => {
     const { token } = req.body;
 
     if (existingUser) {
-      const updatedUser = await User.findByIdAndUpdate(existingUser._id, user);
       return res
         .cookie("token", token, cookieOptions)
         .status(StatusCodes.OK)
         .json({
           success: true,
           message: "User tokenized successfully",
-          data: updatedUser,
+          data: existingUser,
           error: {},
         });
     }
@@ -39,6 +38,7 @@ const register = async (req, res) => {
         error: {},
       });
   } catch (error) {
+    console.log(error);
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       success: false,
       message: "User not created",
@@ -47,7 +47,6 @@ const register = async (req, res) => {
     });
   }
 };
-
 
 const logout = async (req, res) => {
   res.clearCookie("token");

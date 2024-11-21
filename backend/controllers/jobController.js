@@ -195,6 +195,59 @@ const myAppliedJobs = async (req, res) => {
   }
 };
 
+const updateJob = async (req, res) => {
+  const { jobId } = req.params;
+  const jobData = req.body;
+  const { uid } = req.body;
+  try {
+    const user = await User.findOne({ uid });
+    if (!user) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: "Invalid user!",
+        data: {},
+        error: "Invalid user!",
+      });
+    }
+
+    const job = await Job.findById(jobId);
+    if (!job) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: "Invalid job!",
+        data: {},
+        error: "Invalid job!",
+      });
+    }
+
+    if (job.postedBy.toString() !== user._id.toString()) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: "You cannot update this job!",
+        data: {},
+        error: "You cannot update this job!",
+      });
+    }
+
+    const updatedJob = await Job.findByIdAndUpdate(jobId, jobData);
+
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Job updated successfully",
+      data: updatedJob,
+      error: {},
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      success: false,
+      message: "Error updating job!",
+      data: {},
+      error: error.errors,
+    });
+  }
+};
+
 module.exports = {
   addJob,
   allJobs,
@@ -202,4 +255,5 @@ module.exports = {
   myPostedJobs,
   applyJob,
   myAppliedJobs,
+  updateJob,
 };
