@@ -4,5 +4,6 @@ const { validateUserRegisterData, createJWT } = require('../../middlewares');
 const router = express.Router();
 
 router.post("/register", validateUserRegisterData, createJWT, UserController.register);
+router.get("/logout", UserController.logout);
 
 module.exports = router;
