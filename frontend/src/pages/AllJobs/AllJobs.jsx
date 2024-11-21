@@ -10,9 +10,11 @@ import {
 } from "@/components/ui/table";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { Link, useNavigate } from "react-router-dom";
 
 const AllJobs = () => {
   const session = useAxiosSecure();
+  const navigate = useNavigate();
 
   const {
     data: jobs,
@@ -64,9 +66,9 @@ const AllJobs = () => {
                 </TableCell>
                 <TableCell>{job.salary}</TableCell>
                 <TableCell>
-                  <Button to={`/job/${job._id}`} variant="outline">
-                    View Job
-                  </Button>
+                  <Link to={`/job/${job._id}`}>
+                    <Button variant="outline">View Job</Button>
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}
