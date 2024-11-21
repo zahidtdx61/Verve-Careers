@@ -1,4 +1,6 @@
+import AddJob from "@/pages/AddJob/AddJob";
 import AppliedJobs from "@/pages/AppliedJobs/AppliedJobs";
+import ErrorPage from "@/pages/ErrorPage/ErrorPage";
 import Job from "@/pages/Job/Job";
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
@@ -8,12 +10,12 @@ import Blogs from "../pages/Blogs/Blogs";
 import Home from "../pages/Home/Home";
 import Registration from "../pages/Registration/Registration";
 import PrivateRoutes from "./PrivateRoutes";
-import AddJob from "@/pages/AddJob/AddJob";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -58,7 +60,7 @@ const router = createBrowserRouter([
             <AddJob />
           </PrivateRoutes>
         ),
-      }
+      },
     ],
   },
 ]);
