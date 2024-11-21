@@ -1,4 +1,9 @@
-const JobTableData = ({ job }) => {
+import { useState } from "react";
+import DeleteModal from "./DeleteModal";
+
+const JobTableData = ({ job, refetch }) => {
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
   return (
     <tr className="text-center">
       <td className="px-6 py-4 whitespace-nowrap text-xs lg:text-base">
@@ -22,9 +27,13 @@ const JobTableData = ({ job }) => {
           <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:opacity-70">
             Update
           </button>
-          <button className="bg-red-500 text-white px-4 py-2 rounded-md hover:opacity-70">
+          <button
+            onClick={() => setOpenDeleteModal(true)}
+            className="bg-red-500 text-white px-4 py-2 rounded-md hover:opacity-70"
+          >
             Delete
           </button>
+          <DeleteModal open={openDeleteModal} setOpen={setOpenDeleteModal} refetch={refetch} jobId={job._id} />
         </div>
       </td>
     </tr>

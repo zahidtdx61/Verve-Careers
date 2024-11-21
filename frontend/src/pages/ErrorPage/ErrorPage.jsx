@@ -11,7 +11,7 @@ const ErrorPage = () => {
   return (
     <>
       <Helmet>
-        <title>Buzz Forums | 404 - Page Not Found</title>
+        <title>Bloom Hire | 404 - Page Not Found</title>
       </Helmet>
       <section>
         <div className="max-w-screen-xl mx-auto px-4 flex items-center justify-start h-screen md:px-8">

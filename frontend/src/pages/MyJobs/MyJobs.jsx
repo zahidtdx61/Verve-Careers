@@ -9,7 +9,7 @@ const MyJobs = () => {
   const { user } = useAuth();
   const { uid } = user || {};
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["my-jobs", uid],
     queryFn: async () => {
       const { data } = await session.get("/job/posted-jobs");
@@ -17,7 +17,7 @@ const MyJobs = () => {
     },
   });
 
-  console.log(data);
+  console.log("hello");
 
   if (isLoading) <LoadContent />;
 
@@ -52,9 +52,15 @@ const MyJobs = () => {
             </tr>
           </thead>
           <tbody>
-            {data?.map((job) => (
-              <JobTableData key={job._id} job={job} />
-            ))}
+            {data?.length > 0 ? data?.map((job) => (
+              <JobTableData key={job._id} job={job} refetch={refetch} />
+            )) : (
+              <tr className="mt-2">
+                <td colSpan="5" className="text-center">
+                  No Jobs Applied Yet
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

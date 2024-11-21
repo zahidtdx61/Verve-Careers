@@ -1,6 +1,7 @@
 import useAuth from "@/hooks/useAuth";
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import UserInfo from "../UserInfo/UserInfo";
 
 const Navbar = () => {
   const [state, setState] = useState(false);
@@ -16,10 +17,8 @@ const Navbar = () => {
   ];
 
   const navStyle = (isActive) => {
-    return isActive
-      ? "border-b-2 pb-1 px-2 border-gray-900"
-      : "";
-  }
+    return isActive ? "border-b-2 pb-1 px-2 border-gray-900" : "";
+  };
 
   useEffect(() => {
     document.onclick = (e) => {
@@ -87,8 +86,14 @@ const Navbar = () => {
           <ul className="justify-center items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
             {navigation.map((item, idx) => {
               return (
-                <li key={idx} className="text-gray-700 text-base hover:text-gray-900 block">
-                  <NavLink to={item.path}  className={({isActive}) => navStyle(isActive)}>
+                <li
+                  key={idx}
+                  className="text-gray-700 text-base hover:text-gray-900 block"
+                >
+                  <NavLink
+                    to={item.path}
+                    className={({ isActive }) => navStyle(isActive)}
+                  >
                     {item.title}
                   </NavLink>
                 </li>
@@ -97,9 +102,7 @@ const Navbar = () => {
           </ul>
           <div className="flex-1 gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
             {user ? (
-              <div className="size-16">
-                <img src="https://png.pngtree.com/png-clipart/20200224/original/pngtree-cartoon-color-simple-male-avatar-png-image_5230557.jpg" />
-              </div>
+              <UserInfo />
             ) : (
               <Link
                 to={"/join-us"}

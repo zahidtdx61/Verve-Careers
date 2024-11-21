@@ -32,7 +32,7 @@ const AppliedJobs = () => {
         <h1 className="text-3xl font-bold text-center mt-10">Applied Jobs</h1>
       </div>
 
-      <div className="mt-8 mx-auto overflow-x-scroll lg:overflow-auto">
+      <div className="mt-8 mx-auto overflow-x-scroll lg:overflow-hidden">
         <table className="divide-y w-full divide-gray-200 mt-6 text-lg mx-auto">
           <thead className="bg-gray-50">
             <tr>
@@ -52,9 +52,15 @@ const AppliedJobs = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((job) => (
-              <TableData key={job._id} job={job} />
-            ))}
+            {data?.length > 0 ? (
+              data.map((job) => <TableData key={job._id} job={job} />)
+            ) : (
+              <tr className="mt-2">
+                <td colSpan="4" className="text-center">
+                  No Jobs Applied Yet
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
