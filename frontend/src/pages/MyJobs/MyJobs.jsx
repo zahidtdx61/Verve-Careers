@@ -17,8 +17,6 @@ const MyJobs = () => {
     },
   });
 
-  console.log("hello");
-
   if (isLoading) <LoadContent />;
 
   return (

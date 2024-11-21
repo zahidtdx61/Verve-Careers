@@ -1,8 +1,10 @@
 import { useState } from "react";
 import DeleteModal from "./DeleteModal";
+import UpdateModal from "./UpdateModal";
 
 const JobTableData = ({ job, refetch }) => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openUpdateModal, setOpenUpdateModal] = useState(false);
 
   return (
     <tr className="text-center">
@@ -24,7 +26,7 @@ const JobTableData = ({ job, refetch }) => {
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-xs lg:text-base">
         <div className="flex gap-4 justify-center">
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:opacity-70">
+          <button onClick={() => setOpenUpdateModal(true)} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:opacity-70">
             Update
           </button>
           <button
@@ -33,7 +35,8 @@ const JobTableData = ({ job, refetch }) => {
           >
             Delete
           </button>
-          <DeleteModal open={openDeleteModal} setOpen={setOpenDeleteModal} refetch={refetch} jobId={job._id} />
+          <DeleteModal open={openDeleteModal} setOpen={setOpenDeleteModal} refetch={refetch} job={job} />
+          <UpdateModal open={openUpdateModal} setOpen={setOpenUpdateModal} refetch={refetch} job={job} />
         </div>
       </td>
     </tr>
