@@ -24,7 +24,7 @@ const JobDetailsModal = ({ open, setOpen, job }) => {
           Job Details
         </Typography>
         <div className="h-[250px]">
-          <img src={job.image} alt="" />
+          <img src={job.image} alt="" className="w-full h-full object-cover" />
         </div>
 
         <div>

@@ -2,6 +2,7 @@ import AddJob from "@/pages/AddJob/AddJob";
 import AppliedJobs from "@/pages/AppliedJobs/AppliedJobs";
 import ErrorPage from "@/pages/ErrorPage/ErrorPage";
 import Job from "@/pages/Job/Job";
+import MyJobs from "@/pages/MyJobs/MyJobs";
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import AllJobs from "../pages/AllJobs/AllJobs";
@@ -58,6 +59,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <AddJob />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "my-jobs",
+        element: (
+          <PrivateRoutes>
+            <MyJobs />
           </PrivateRoutes>
         ),
       },
