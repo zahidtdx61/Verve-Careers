@@ -35,8 +35,16 @@ const addJob = async (req, res) => {
 };
 
 const allJobs = async (req, res) => {
+  const { category } = req.query;
+  console.log(category);
   try {
-    const jobs = await Job.find().populate("postedBy");
+    let jobs;
+    if (category) {
+      jobs = await Job.find({ category }).populate("postedBy");
+    } else {
+      jobs = await Job.find().populate("postedBy");
+    }
+    
     res.status(StatusCodes.OK).json({
       success: true,
       message: "All jobs fetched successfully",
@@ -56,7 +64,9 @@ const allJobs = async (req, res) => {
 const jobDetails = async (req, res) => {
   const { jobId } = req.params;
   try {
-    const job = await Job.findById(jobId).populate("postedBy").populate("applicants");
+    const job = await Job.findById(jobId)
+      .populate("postedBy")
+      .populate("applicants");
     res.status(StatusCodes.OK).json({
       success: true,
       message: "Job details fetched successfully",
@@ -107,7 +117,7 @@ const myPostedJobs = async (req, res) => {
 const applyJob = async (req, res) => {
   const { uid } = req.body;
   const { jobId } = req.params;
-  
+
   try {
     const user = await User.findOne({ uid });
     if (!user) {
