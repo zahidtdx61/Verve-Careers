@@ -41,7 +41,9 @@ const Navbar = () => {
             Bloom Hire
           </Link>
 
-          <div className="md:hidden">
+          <div className="md:hidden flex ">
+            <UserInfo />
+
             <button
               className="menu-btn text-gray-500 hover:text-gray-800"
               onClick={() => setState(!state)}
@@ -102,7 +104,9 @@ const Navbar = () => {
           </ul>
           <div className="flex-1 gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
             {user ? (
-              <UserInfo />
+              <div className="hidden lg:block">
+                <UserInfo />
+              </div>
             ) : (
               <Link
                 to={"/join-us"}
