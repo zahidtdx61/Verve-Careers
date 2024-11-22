@@ -42,7 +42,7 @@ const Navbar = () => {
           </Link>
 
           <div className="md:hidden flex ">
-            <UserInfo />
+            {user && <UserInfo />}
 
             <button
               className="menu-btn text-gray-500 hover:text-gray-800"

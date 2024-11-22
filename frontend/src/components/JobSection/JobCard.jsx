@@ -22,7 +22,7 @@ const JobCard = ({ job }) => {
       </div>
 
       <Link to={`/job/${job._id}`} className="flex justify-end">
-        <button className="bg-blue-500 text-white px-6 py-2 rounded-lg mt-2 w-fit">
+        <button className="bg-blue-500 text-white px-6 py-2 rounded-lg mt-2 w-fit hover:opacity-75">
           Veiw Details
         </button>
       </Link>
