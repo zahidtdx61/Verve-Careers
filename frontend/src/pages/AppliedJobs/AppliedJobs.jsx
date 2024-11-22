@@ -44,7 +44,7 @@ const AppliedJobs = () => {
               </th>
 
               <th className="px-6 py-4 whitespace-nowrap text-xs lg:text-base font-medium">
-                Applied On
+                Job Published Date
               </th>
               <th className="px-6 py-4 whitespace-nowrap text-xs lg:text-base font-medium">
                 Action
