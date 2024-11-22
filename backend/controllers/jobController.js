@@ -36,7 +36,7 @@ const addJob = async (req, res) => {
 
 const allJobs = async (req, res) => {
   const { category } = req.query;
-  console.log(category);
+  // console.log(category);
   try {
     let jobs;
     if (category) {
@@ -44,7 +44,7 @@ const allJobs = async (req, res) => {
     } else {
       jobs = await Job.find().populate("postedBy");
     }
-    
+
     res.status(StatusCodes.OK).json({
       success: true,
       message: "All jobs fetched successfully",
@@ -303,6 +303,7 @@ const deleteJob = async (req, res) => {
       error: {},
     });
   } catch (error) {
+    console.log(error);
     return res.status(StatusCodes.BAD_REQUEST).json({
       success: false,
       message: "Error deleting job!",

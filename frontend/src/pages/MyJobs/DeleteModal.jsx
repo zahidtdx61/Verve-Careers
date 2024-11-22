@@ -12,14 +12,15 @@ import {
 import toast from "react-hot-toast";
 import { MdWarning } from "react-icons/md";
 
-const DeleteModal = ({ open, setOpen, refetch, jobId }) => {
+const DeleteModal = ({ open, setOpen, refetch, job }) => {
   const session = useAxiosSecure();
   const { setIsLoading } = useAuth();
 
   const handleDelete = async () => {
     try {
       setIsLoading(true);
-      await session.delete(`/job/delete-job/${jobId}`);
+      // console.log({ job });
+      await session.delete(`/job/delete-job/${job._id}`);
       setIsLoading(false);
       setOpen(false);
       toast.success("Job deleted successfully");
