@@ -10,8 +10,8 @@ const corsOptions = {
   origin: [
     "http://localhost:5173",
     "http://localhost:5174",
-    "https://verve-careers.web.app",
-    "https://verve-careers.vercel.app",
+    "https://bloom-hire.web.app",
+    "https://bloom-hire.vercel.app",
   ],
   credentials: true,
   optionSuccessStatus: 200,
