@@ -1,5 +1,7 @@
+import LoadContent from "@/components/Loader/LoadContent";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 import Markdown from "react-markdown";
 import { useParams } from "react-router-dom";
 import rehypeRaw from "rehype-raw";
@@ -16,13 +18,16 @@ const Blog = () => {
   });
 
   if (blogLoading) {
-    return <p>Loading...</p>;
+    return <LoadContent />;
   }
 
   const { cover_image, title, tags, url, body_html } = blog;
 
   return (
     <div className="mx-auto max-w-screen-xl transition p-2  border-opacity-30   group hover:no-underline focus:no-underline ">
+      <Helmet>
+        <title>Bloom Hire | Blog</title>
+      </Helmet>
       <img
         className="object-contain w-full rounded h-56 "
         src={cover_image || placeholderImg}

@@ -1,3 +1,4 @@
+import LoadContent from "@/components/Loader/LoadContent";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -10,6 +11,7 @@ import {
 } from "@/components/ui/table";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
 
 const AllJobs = () => {
@@ -32,6 +34,10 @@ const AllJobs = () => {
 
   return (
     <div className="w-full lg:max-w-screen-xl mx-auto">
+      <Helmet>
+        <title>Bloom Hire | All Jobs</title>
+      </Helmet>
+
       <div className="mx-auto text-center mb-8">
         <h1 className="text-2xl font-medium text-gray-900 text-center">
           All Jobs
@@ -40,7 +46,7 @@ const AllJobs = () => {
       </div>
 
       {jobsLoading ? (
-        <p>Loading...</p>
+        <LoadContent />
       ) : jobsError ? (
         <p>Error: {jobsError.message}</p>
       ) : (

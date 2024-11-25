@@ -1,24 +1,32 @@
 import BlogCard from "@/components/BlogCard/BlogCard";
+import LoadContent from "@/components/Loader/LoadContent";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
 const Blogs = () => {
   const { data: blogs, isLoading: blogsLoading } = useQuery({
     queryKey: ["blogs"],
     queryFn: async () => {
-      const response = await axios.get("https://dev.to/api/articles?per_page=20&top=7");
+      const response = await axios.get(
+        "https://dev.to/api/articles?per_page=20&top=7"
+      );
       return response.data;
     },
   });
 
   if (blogsLoading) {
-    return <p>Loading...</p>;
+    return <LoadContent />;
   }
-  
+
   return (
     <div>
       <section className="px-4 sm:px-8 lg:px-12 py-4">
+        <Helmet>
+          <title>Bloom Hire | Blogs</title>
+        </Helmet>
+
         <div className="container max-w-6xl py-6 mx-auto space-y-6 sm:space-y-12">
           <Link
             to={`/blog/${blogs[0]?.id}`}

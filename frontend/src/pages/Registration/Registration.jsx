@@ -29,6 +29,10 @@ const Registration = () => {
   
   return (
     <div className="max-w-screen-xl mx-auto mt-12 flex flex-col lg:flex-row justify-center gap-8">
+      <Helmet>
+        <title>Bloom Hire | Registration</title>
+      </Helmet>
+
       <div className="w-full lg:w-[35%] p-4">
         <h1 className="text-3xl font-bold text-center">Join us</h1>
         <p className="text-center text-gray-500 mt-2">

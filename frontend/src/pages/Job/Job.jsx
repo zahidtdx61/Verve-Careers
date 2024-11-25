@@ -1,9 +1,11 @@
+import LoadContent from "@/components/Loader/LoadContent";
 import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import ApplyJob from "./ApplyJob";
+import { Helmet } from "react-helmet-async";
 
 const Job = () => {
   const { user } = useAuth();
@@ -39,10 +41,13 @@ const Job = () => {
     return false;
   };
 
-  if (jobLoading) return <p>Loading...</p>;
+  if (jobLoading) return <LoadContent />;
 
   return (
     <div className="w-[90%] lg:max-w-screen-xl mx-auto">
+      <Helmet>
+        <title>Bloom Hire | Job</title>
+      </Helmet>
       <div>
         <div className="h-[500px]">
           <img

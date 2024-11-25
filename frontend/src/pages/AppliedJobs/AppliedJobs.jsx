@@ -2,6 +2,7 @@ import LoadContent from "@/components/Loader/LoadContent";
 import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 import TableData from "./TableData";
 
 const AppliedJobs = () => {
@@ -28,6 +29,9 @@ const AppliedJobs = () => {
 
   return (
     <div className="w-[95%] mx-auto lg:max-w-screen-xl">
+      <Helmet>
+        <title>Bloom Hire | Applied Jobs</title>
+      </Helmet>
       <div>
         <h1 className="text-3xl font-bold text-center mt-10">Applied Jobs</h1>
       </div>

@@ -3,6 +3,7 @@ import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import JobTableData from "./JobTableData";
+import { Helmet } from "react-helmet-async";
 
 const MyJobs = () => {
   const session = useAxiosSecure();
@@ -21,6 +22,9 @@ const MyJobs = () => {
 
   return (
     <div className="w-full lg:max-w-screen-xl mx-auto">
+      <Helmet>
+        <title>Bloom Hire | My Jobs</title>
+      </Helmet>
       <div className="mx-auto text-center mb-8">
         <h1 className="text-2xl font-medium text-gray-900 text-center">
           My Jobs

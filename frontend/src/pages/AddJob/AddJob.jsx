@@ -2,6 +2,7 @@ import LoadContent from "@/components/Loader/LoadContent";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Select from "react-select";
@@ -59,6 +60,9 @@ const AddJob = () => {
 
   return (
     <div className="w-full mx-auto mt-4">
+      <Helmet>
+        <title>Bloom Hire | Add Job</title>
+      </Helmet>
       <div className="w-fit mx-auto px-2 tracking-tight border-primary-green  text-center font-mulish font-semibold text-2xl text-primary-teal border-b-2">
         Add a new Job
       </div>
